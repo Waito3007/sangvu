@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface Project {
@@ -49,47 +48,22 @@ const projectsData: Project[] = [
 ];
 
 const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
-  <div className="bg-card-bg rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-accent/30">
-    <img src={project.imageUrl} alt={project.title} className="w-full h-56 object-cover" />
+  <div className="bg-background rounded-xl shadow-xl overflow-hidden animate-fade-in-up hover:shadow-2xl transition-shadow duration-300 group">
+    <img src={project.imageUrl} alt={project.title} className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500" />
     <div className="p-6">
-      <h3 className="text-2xl font-semibold mb-3 text-accent">{project.title}</h3>
-      <p className="text-gray-300 mb-4 text-sm leading-relaxed h-20 overflow-y-auto">{project.description}</p>
-      <div className="mb-4">
-        <h4 className="text-sm font-semibold text-gray-400 mb-2">Tech Stack:</h4>
-        <div className="flex flex-wrap gap-2">
-          {project.techStack.map((tech) => (
-            <span key={tech} className="bg-secondary/50 text-light-text text-xs px-3 py-1 rounded-full">
-              {tech}
-            </span>
-          ))}
-        </div>
+      <h3 className="text-2xl font-semibold mb-2 text-accent group-hover:underline transition-all duration-300">{project.title}</h3>
+      <p className="text-gray-300 mb-4 min-h-[60px]">{project.description}</p>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {project.techStack.map((tech) => (
+          <span key={tech} className="bg-secondary text-white text-xs px-3 py-1 rounded-full font-medium shadow-sm">{tech}</span>
+        ))}
       </div>
-      <div className="flex justify-start space-x-4 mt-auto">
+      <div className="flex gap-4">
         {project.liveLink && (
-          <a
-            href={project.liveLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent hover:text-yellow-400 transition-colors duration-300 font-medium inline-flex items-center"
-          >
-            Live Demo
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
+          <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="bg-accent text-dark-text px-4 py-2 rounded-lg font-semibold shadow hover:bg-yellow-600 transition-colors duration-300">Live</a>
         )}
         {project.repoLink && (
-          <a
-            href={project.repoLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent hover:text-yellow-400 transition-colors duration-300 font-medium inline-flex items-center"
-          >
-            GitHub Repo
-             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-             </svg>
-          </a>
+          <a href={project.repoLink} target="_blank" rel="noopener noreferrer" className="bg-secondary text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-blue-700 transition-colors duration-300">Repo</a>
         )}
       </div>
     </div>
@@ -99,15 +73,32 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
 
 const Projects: React.FC = () => {
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section className="py-16 md:py-24 bg-card-bg animate-fade-in-up">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-accent animate-fade-in-up">
-          My Projects
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-accent animate-fade-in-up" style={{animationDelay: '0.1s'}}>
+          Projects
         </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-          {projectsData.map((project, index) => (
-             <div key={project.id} className="animate-fade-in-up" style={{animationDelay: `${index * 0.15}s`}}>
-                <ProjectCard project={project} />
+        <div className="grid gap-10 md:grid-cols-2">
+          {projectsData.map((project, idx) => (
+            <div key={project.id} className="bg-background rounded-xl shadow-xl overflow-hidden animate-fade-in-up hover:shadow-2xl transition-shadow duration-300 group" style={{animationDelay: `${idx * 0.15 + 0.2}s`}}>
+              <img src={project.imageUrl} alt={project.title} className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="p-6">
+                <h3 className="text-2xl font-semibold mb-2 text-accent group-hover:underline transition-all duration-300">{project.title}</h3>
+                <p className="text-gray-300 mb-4 min-h-[60px]">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.techStack.map((tech) => (
+                    <span key={tech} className="bg-secondary text-white text-xs px-3 py-1 rounded-full font-medium shadow-sm">{tech}</span>
+                  ))}
+                </div>
+                <div className="flex gap-4">
+                  {project.liveLink && (
+                    <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="bg-accent text-dark-text px-4 py-2 rounded-lg font-semibold shadow hover:bg-yellow-600 transition-colors duration-300">Live</a>
+                  )}
+                  {project.repoLink && (
+                    <a href={project.repoLink} target="_blank" rel="noopener noreferrer" className="bg-secondary text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-blue-700 transition-colors duration-300">Repo</a>
+                  )}
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -117,4 +108,3 @@ const Projects: React.FC = () => {
 };
 
 export default Projects;
-    

@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 // Heroicons SVGs (ClipboardCopyIcon, MailIcon, etc.)
@@ -39,40 +38,28 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-background text-light-text">
+    <section className="py-16 md:py-24 bg-background text-light-text animate-fade-in-up">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-accent animate-fade-in-up">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-accent animate-fade-in-up" style={{animationDelay: '0.1s'}}>
           Get In Touch
         </h2>
         <div className="max-w-2xl mx-auto text-center animate-fade-in-up" style={{animationDelay: '0.2s'}}>
           <p className="text-lg text-gray-300 mb-8">
             I'm always open to discussing new projects, creative ideas, or opportunities to be part of something amazing. Feel free to reach out!
           </p>
-          
-          <div className="mb-8">
-            <div className="flex items-center justify-center bg-card-bg p-3 rounded-lg shadow-md max-w-sm mx-auto">
-              <MailIcon />
-              <a href={`mailto:${email}`} className="ml-3 text-lg text-accent hover:underline">{email}</a>
-              <button
-                onClick={copyToClipboard}
-                title="Copy email"
-                className="ml-4 p-2 text-gray-400 hover:text-accent transition-colors duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-accent"
-              >
-                {copied ? <span className="text-xs">Copied!</span> : <ClipboardCopyIcon />}
-              </button>
+          <div className="flex flex-col items-center gap-6">
+            <div className="flex gap-4 justify-center">
+              <a href="https://linkedin.com/in/sangvu-placeholder" target="_blank" rel="noopener noreferrer" className="bg-card-bg p-3 rounded-full shadow hover:bg-secondary hover:text-white transition-colors duration-300 animate-fade-in-up" style={{animationDelay: '0.3s'}} aria-label="LinkedIn"><LinkedInIcon /></a>
+              <a href="https://github.com/sangvu-placeholder" target="_blank" rel="noopener noreferrer" className="bg-card-bg p-3 rounded-full shadow hover:bg-secondary hover:text-white transition-colors duration-300 animate-fade-in-up" style={{animationDelay: '0.4s'}} aria-label="GitHub"><GitHubIcon /></a>
+              <a href={`mailto:${email}`} className="bg-card-bg p-3 rounded-full shadow hover:bg-secondary hover:text-white transition-colors duration-300 animate-fade-in-up" style={{animationDelay: '0.5s'}} aria-label="Email"><MailIcon /></a>
             </div>
-          </div>
-
-          <div className="flex justify-center space-x-6">
-            <a href="https://linkedin.com/in/sangvu-placeholder" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-accent transition-colors duration-300 transform hover:scale-110">
-              <LinkedInIcon />
-              <span className="sr-only">LinkedIn</span>
-            </a>
-            <a href="https://github.com/sangvu-placeholder" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-accent transition-colors duration-300 transform hover:scale-110">
-              <GitHubIcon />
-              <span className="sr-only">GitHub</span>
-            </a>
-            {/* Add other social links as needed */}
+            <div className="flex items-center gap-2 animate-fade-in-up" style={{animationDelay: '0.6s'}}>
+              <span className="text-gray-300 font-mono text-lg select-all">{email}</span>
+              <button onClick={copyToClipboard} className="ml-2 p-2 rounded-full bg-card-bg hover:bg-accent hover:text-dark-text transition-colors duration-300 shadow" aria-label="Copy email">
+                <ClipboardCopyIcon />
+              </button>
+              {copied && <span className="text-accent text-sm ml-2 animate-fade-in-up">Copied!</span>}
+            </div>
           </div>
         </div>
       </div>
@@ -81,4 +68,3 @@ const Contact: React.FC = () => {
 };
 
 export default Contact;
-    

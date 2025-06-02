@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface ExperienceItemProps {
@@ -48,21 +47,17 @@ const experienceData: ExperienceItemProps[] = [
 ];
 
 const ExperienceItem: React.FC<{ item: ExperienceItemProps; isLast: boolean }> = ({ item, isLast }) => (
-  <div className="relative pl-10 animate-fade-in-up">
-    <div className="absolute left-0 top-0 h-full">
-      <span className="block w-4 h-4 bg-accent rounded-full absolute left-[-7.5px] top-1 ring-4 ring-card-bg"></span>
-      {!isLast && <span className="block w-0.5 h-full bg-secondary/50 absolute left-0 top-4"></span>}
-    </div>
-    <div className="mb-8 ml-4 p-6 bg-card-bg rounded-lg shadow-lg hover:shadow-accent/20 transition-shadow duration-300">
-        <div className="flex items-center mb-2">
-            {item.logoUrl && <img src={item.logoUrl} alt={`${item.company} logo`} className="w-8 h-8 rounded-full mr-3"/>}
-            <h3 className="text-xl font-semibold text-accent">{item.title}</h3>
-        </div>
-      <p className="text-md text-gray-400 mb-1">{item.company}</p>
-      <p className="text-sm text-gray-500 mb-3">{item.duration}</p>
-      <ul className="list-disc list-inside text-gray-300 space-y-1 text-sm">
-        {item.description.map((desc, index) => (
-          <li key={index}>{desc}</li>
+  <div className={`flex items-start gap-6 mb-10 animate-fade-in-up`} style={{animationDelay: isLast ? '0.3s' : '0.2s'}}>
+    <img src={item.logoUrl} alt={item.company} className="w-14 h-14 rounded-full shadow-lg border-2 border-secondary bg-white object-cover" />
+    <div className="flex-1">
+      <h3 className="text-xl font-semibold text-accent mb-1">{item.title}</h3>
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+        <span className="text-light-text font-medium">{item.company}</span>
+        <span className="text-xs text-gray-400">{item.duration}</span>
+      </div>
+      <ul className="list-disc list-inside text-gray-300 space-y-1">
+        {item.description.map((desc, i) => (
+          <li key={i}>{desc}</li>
         ))}
       </ul>
     </div>
@@ -71,14 +66,14 @@ const ExperienceItem: React.FC<{ item: ExperienceItemProps; isLast: boolean }> =
 
 const Experience: React.FC = () => {
   return (
-    <section className="py-16 md:py-24 bg-card-bg">
+    <section className="py-16 md:py-24 bg-background animate-fade-in-up">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-accent animate-fade-in-up">
-          Work Experience
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-accent animate-fade-in-up" style={{animationDelay: '0.1s'}}>
+          Experience
         </h2>
-        <div className="max-w-3xl mx-auto relative">
-          {experienceData.map((item, index) => (
-            <ExperienceItem key={index} item={item} isLast={index === experienceData.length - 1} />
+        <div className="max-w-3xl mx-auto">
+          {experienceData.map((item, idx) => (
+            <ExperienceItem key={item.company + item.title} item={item} isLast={idx === experienceData.length - 1} />
           ))}
         </div>
       </div>
@@ -87,4 +82,3 @@ const Experience: React.FC = () => {
 };
 
 export default Experience;
-    
